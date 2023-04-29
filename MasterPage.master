@@ -43,7 +43,7 @@
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
               <li><a href="register.aspx" class="active">Sign Up</a></li>
-              <li><a href="Login.aspx" class="active">Sign IN</a></li> 
+              <li><a href="Login.aspx" class="active">Sign In</a></li> 
               <%--<li><div class="main-white-button"><a href="#"><i class="fa fa-plus"></i> Add Your Listing</a></div></li>--%> 
             </ul>        
             <a class='menu-trigger'>

@@ -14,12 +14,26 @@ public partial class Landing_upload : System.Web.UI.Page
 {
     SqlConnection conn;
     SqlCommand cmd;
+    Int16 userId;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["email"] == null) Response.Redirect("Login.aspx");
+        
         string path = ConfigurationManager.ConnectionStrings["connect"].ToString();
         conn = new SqlConnection(path);
         conn.Open();
+
+        string query = "select id from accounts where email = '" + Session["email"].ToString() + "'";
+        SqlDataAdapter ad = new SqlDataAdapter(query, conn);
+        DataSet ds = new DataSet();
+        ad.Fill(ds);
+
+        if (ds.Tables[0].Rows.Count == 0) Response.Redirect("Login.aspx");
+        else
+        {
+            userId = Convert.ToInt16(ds.Tables[0].Rows[0][0]);
+        }
     }
     protected void LinkButton1_Click(object sender, EventArgs e)
     {
@@ -42,10 +56,10 @@ public partial class Landing_upload : System.Web.UI.Page
             }
             
             long file_size = FileUpload.FileContent.Length;
-            if (file_size >= 1024 * 1024 * 512){
+            //if (file_size >= 1024 * 1024 * 512){
                 Response.Write("<script> alert('You cannot upload files larger than 500 MB!')</script>");
-                Response.Redirect("landing.aspx");
-            }
+             //   Response.Redirect("landing.aspx");
+            //}
 
             if(!Directory.Exists(Server.MapPath(dir_struct))){
                 Directory.CreateDirectory(dir_struct);
@@ -54,20 +68,21 @@ public partial class Landing_upload : System.Web.UI.Page
             string append_name="";
 
             if(File.Exists(Server.MapPath(dir_struct + fname)))
-                append_name += DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
+                append_name += DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
             FileUpload.SaveAs(Server.MapPath(dir_struct + append_name+ fname));
             opath = dir_struct + append_name + fname;
 
             string generatedCode = generateCode(8);
             string pname = append_name + fname;
-            string query = "insert into files values(1, '" + fname + "', '" + pname + "', '" + generatedCode + "','" + DateTime.Now.ToString("yyy-MM-dd HH:mm") +"')";
+            string query = "insert into files values("+ userId.ToString() +", '" + fname + "', '" + pname + "', '" + generatedCode + "','" + DateTime.Now.ToString("yyy-MM-dd HH:mm") +"',0 )";
             cmd = new SqlCommand(query, conn);
             cmd.ExecuteNonQuery();
 
             Response.Write("<script> alert('File Uploaded!')</script>");
             Response.Redirect("uploads.aspx");
         }
+        else Response.Write("<script> alert('Please select a file');</script>");
     }
     protected string generateCode(int size){
         Random rand = new Random();

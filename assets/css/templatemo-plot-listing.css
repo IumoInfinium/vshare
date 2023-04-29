@@ -900,7 +900,7 @@ Popular Categories
 .popular-categories .naccs .menu div {
   color: #fff;
   font-size: 15px;
-  background-color: #8d99af;
+  background-color: transparent;
   margin-bottom: 1px;
   height: 126px;
   text-align: left;
@@ -1622,7 +1622,7 @@ Listing Page
   color: #fff;
   font-size: 15px;
   border-radius: 7px;
-  background-color: #8d99af;
+
   margin-bottom: 30px;
   height: 126px;
   text-align: left;
@@ -1631,6 +1631,10 @@ Listing Page
   cursor: pointer;
   position: relative;
   transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.listing-page .naccs .menu div:hover {
+    background-color:#2b2d42;
 }
 
 .listing-page .naccs .menu div.active,

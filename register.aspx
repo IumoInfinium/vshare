@@ -1,18 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="register.aspx.cs" Inherits="register" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-      <div class="page-heading">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="top-text header-text">
-              <asp:Label ID="Label1" runat="server" Text="Label" style="font-size:30px">Sign Up</asp:Label>
-          </div>
+<div class="page-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="top-text header-text">
+                        
+                        <h2>Sign Up</h2>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-
   <div class="contact-page">
     <div class="container">
       <div class="row">
