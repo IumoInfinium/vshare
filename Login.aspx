@@ -18,7 +18,7 @@
   <div class="contact-page">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6" style="margin-left:300px">
           <div class="inner-content">
             <div class="row">
               <div class="col-lg-8">
@@ -27,10 +27,10 @@
               <div class="col-lg-6 align-self-center">
                 <form id="contact" action="" method="get"  style="margin:40px;padding:20px">
                   <div class="row">
-                    <div class="col-lg-8" >
+                    <div class="col-lg-8" style="margin:40px">>
                           <asp:TextBox ID="TextBox1" runat="server" style="margin:40px;padding:5px" placeholder="Email" required=""></asp:TextBox>
                         <asp:TextBox ID="TextBox2" runat="server" style="margin:40px;padding:5px" placeholder="Pasword" required=""></asp:TextBox>
-                        <asp:Button ID="Button1" runat="server" class="main-button " Text="Login" />
+                        <asp:Button ID="Button1" runat="server" class="main-button " style="margin:40px;padding:5px" Text="Login" OnClick="Button1_Click" />
                     </div>
                    </div>
              </form>
