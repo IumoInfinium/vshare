@@ -35,8 +35,9 @@
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="register.aspx" class="logo">
-                <img class="logo" src="assets/images/vshare-logo.png" alt="logo"/>
+            <a href="/" class="logo" >
+                <img class="logo" src="assets/images/white-logo.png" alt="logo"/>
+
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
@@ -59,7 +60,7 @@
     <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>
-         </div>
+       
     </form>
 </body>
 </html>

@@ -22,8 +22,8 @@
               <div class="col-lg-8">
                
               </div>
-              <div class="col-lg-6 align-self-center" >
-                <form id="contact" action="" method="get">
+              <div class="col-lg-6 align-self-center">
+
                   <div class="row">
                     <div class="col-lg-8" style="margin:40px">
                           <asp:TextBox ID="TextBox1" runat="server" style="margin:40px;padding:5px;" placeholder="Name" required=""> </asp:TextBox>
@@ -32,7 +32,6 @@
                         <asp:Button ID="Button1" runat="server" style="margin:40px;padding:5px;" class="main-button " Text="Register" OnClick="Button1_Click" />
                     </div>
                    </div>
-             </form>
               </div>
             </div>
           </div>
