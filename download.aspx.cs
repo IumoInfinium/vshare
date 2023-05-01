@@ -14,6 +14,7 @@ public partial class download : System.Web.UI.Page
 {
     SqlConnection conn;
     SqlDataAdapter ad;
+    SqlCommand cmd;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -26,33 +27,42 @@ public partial class download : System.Web.UI.Page
 
         conn.Open();
 
-        string query = "select name,pname from files where code = '"+ Request.QueryString["code"].ToString() +"'";
-        ad = new SqlDataAdapter(query, conn);
-        DataSet ds = new DataSet();
-        int rows = ad.Fill(ds);
-
-        if (rows != 0)
+        if (!IsPostBack)
         {
-            string orignal_fname = ds.Tables[0].Rows[0][0].ToString();
-            string saved_fname = ds.Tables[0].Rows[0][1].ToString();
-            string filePath = Server.MapPath("~/files/" + saved_fname);
 
-            FileInfo file = new FileInfo(filePath);
+            string query = "select * from files where code = '" + Request.QueryString["code"].ToString() + "'";
+            ad = new SqlDataAdapter(query, conn);
+            DataSet ds = new DataSet();
+            int rows = ad.Fill(ds);
 
-            if (file.Exists)
+            if (rows != 0)
             {
-                Response.Clear();
-                Response.AddHeader("Content-Disposition", "attachment; filename=" + orignal_fname);
-                Response.ContentType = "text/plain";
-                Response.Flush();
+                string orignal_fname = ds.Tables[0].Rows[0][2].ToString();
+                string saved_fname = ds.Tables[0].Rows[0][3].ToString();
+                string filePath = Server.MapPath("~/files/" + saved_fname);
 
-                Response.TransmitFile(file.FullName);
-                Response.End();
+                FileInfo file = new FileInfo(filePath);
+
+                if (file.Exists)
+                {
+                    Response.Clear();
+                    Response.AddHeader("Content-Disposition", "attachment; filename=" + orignal_fname);
+                    Response.ContentType = "text/plain";
+                    Response.Flush();
+
+                    Response.TransmitFile(file.FullName);
+                    Response.End();
+
+                    string q = "update files set downloads = downloads+1 where id='" + ds.Tables[0].Rows[0][0].ToString() + "'";
+                    cmd = new SqlCommand(q, conn);
+                    cmd.ExecuteNonQuery();
+
+                }
+                else Response.Redirect("login.aspx");
+
             }
-            else Response.Redirect("login.aspx");
-
+            else Response.Write("<script> alert('File not found!');</script>");
         }
-        else Response.Write("<script> alert('File not found!');</script>");
 
     }
 }

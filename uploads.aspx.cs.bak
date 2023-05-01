@@ -24,29 +24,27 @@ public partial class uploads : System.Web.UI.Page
         conn = new SqlConnection(path);
         conn.Open();
 
-        if (!IsPostBack)
-        {
-            string query = "select TOP 10 * from files where userID = (SELECT id from accounts where email= '" + email + "') order by uploadedOn desc";
-            ad = new SqlDataAdapter(query, conn);
-            DataSet ds = new DataSet();
-            int rows = ad.Fill(ds);
+        
+        string query = "select TOP 10 * from files where userID = (SELECT id from accounts where email= '"+ email +"') order by uploadedOn desc";
+        ad = new SqlDataAdapter(query, conn);
+        DataSet ds = new DataSet();
+        int rows = ad.Fill(ds);
 
-            if (rows != 0)
-            {
-                fileRepeater.DataSource = ds;
-                fileRepeater.DataBind();
-            }
-            else
-            {
-                NoUploads_Label.Style.Remove("display");
-            }
+        if (rows != 0)
+        {
+            fileRepeater.DataSource = ds;
+            fileRepeater.DataBind();
+        }
+        else
+        {
+            NoUploads_Label.Style.Remove("display");
         }
     }
     protected void ViewFile(object sender, CommandEventArgs e)
     {
         if (e.CommandName == "view-file")
         {
-            //Response.Redirect("Default.aspx");
+            Response.Redirect("Default.aspx");
         }
         else if (e.CommandName == "file-link")
         {

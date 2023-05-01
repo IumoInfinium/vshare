@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.IO;  
+
+
+public partial class accounts : System.Web.UI.Page
+{
+    SqlConnection conn;
+    SqlDataAdapter ad;
+    SqlCommand cmd;
+    Int16 user_id;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (Session["email"] == null) Response.Redirect("login.aspx");
+        string path = ConfigurationManager.ConnectionStrings["connect"].ToString();
+        conn = new SqlConnection(path);
+
+        conn.Open();
+
+        if (!IsPostBack)
+        {
+            string query = "select * from accounts where email = '" + Session["email"].ToString() + "'";
+            ad = new SqlDataAdapter(query, conn);
+            DataSet ds = new DataSet();
+            ad.Fill(ds);
+            user_id = Convert.ToInt16(ds.Tables[0].Rows[0][0]);
+            Label3.Text = ds.Tables[0].Rows[0][1].ToString();
+            TextBox1.Text = Session["email"].ToString();
+            TextBox2.Text = ds.Tables[0].Rows[0][3].ToString();
+
+
+            string query2 = "select count(id) uploads, sum(downloads) downloads from files where userID=" + user_id.ToString();
+            SqlDataAdapter ad2 = new SqlDataAdapter(query2, conn);
+            DataSet ds2 = new DataSet();
+            ad2.Fill(ds2);
+
+            Label1.Text = ds2.Tables[0].Rows[0][0].ToString();
+            Label2.Text = ds2.Tables[0].Rows[0][1].ToString() == "" ? "0" : ds2.Tables[0].Rows[0][1].ToString();
+        }
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+
+        if (TextBox2.Text == "") Response.Write("<script> alert('Password cannot be empty!');</script>");
+        else
+        {
+            if (!IsPostBack)
+            {
+                string query = "update accounts set password = '" + TextBox2.Text.Trim() + "' where email= " + Session["email"].ToString();
+                cmd = new SqlCommand(query, conn);
+                cmd.ExecuteNonQuery();
+                Response.Write("<script> alert('Password Updated!')</script>");
+                Response.Redirect("accounts.aspx");
+            }
+        }
+    }
+}

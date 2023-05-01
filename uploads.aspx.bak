@@ -78,7 +78,7 @@
         </div>
     </div>
     <hr />
-    <div class="listing-page" style="margin-bottom: 10px;">
+    <div class="listing-page">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -87,50 +87,6 @@
                             <div class="row">
                                 <div class="col-lg-9 center">
                                     <div class="menu">
-                                        <div class="file-item" style="background-color: #2b2d42;">
-                                            <div class="file-image">
-                                                <span class="icon">
-                                                    <img src="assets/images/file.png" alt="">
-                                                </span>
-                                                &nbsp;&nbsp;&nbsp;
-                                                
-                                            </div>
-                                            <div>
-                                                <label>File Name</label>
-                                            </div>
-                                            
-                                            <div class="file-download">
-                                                <label>Number of Downloads</label>
-                                                &nbsp;
-                                                | 
-                                                &nbsp;
-                                                <label> Uploaded On</label>
-                                                &nbsp;
-                                                | 
-                                                &nbsp;
-                                                <label>Download Link</label>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="listing-page" style="margin-top:0;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="naccs">
-                        <div class="grid">
-                            <div class="row">
-                                <div class="col-lg-9 center">
-                                    <div class="menu" style="text-align:center;">
                                         <asp:Repeater runat="server" ID="fileRepeater">
                                             <ItemTemplate>
                                                 <div class="file-item">
@@ -147,11 +103,7 @@
                                                         </asp:LinkButton>
                                                     </div>
                                                     <div class="file-download">
-                                                        <asp:Label runat="server" ID="Label2" Text='<%# Eval("downloads") %>'></asp:Label>
-                                                        &nbsp;
-                                                        | 
-                                                        &nbsp;
-                                                        <asp:Label runat="server" ID="Label1" Text='<%# DateTime.Parse(Eval("uploadedOn").ToString()).ToString("dd/MM/yyyy  HH:mm") %>'></asp:Label> 
+                                                        <asp:Label runat="server" ID="Label1" Text='<%# Eval("uploadedOn") %>'></asp:Label> 
                                                         &nbsp;
                                                         | 
                                                         &nbsp;
@@ -166,8 +118,8 @@
                                                 
                                             </ItemTemplate>
                                         </asp:Repeater>
-                                        <asp:Label runat="server" ID="NoUploads_Label" Text="" Style="display: none; border-bottom:1px solid black">
-                                            No Uploaded Files
+                                        <asp:Label runat="server" ID="NoUploads_Label" Text="" Style="display: none;">
+
                                         </asp:Label>
                                     </div>
                                 </div>
