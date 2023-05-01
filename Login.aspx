@@ -22,8 +22,8 @@
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
                 <form class="login100-form validate-form">
 
-                    <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
-                        <span class="label-input100">Username</span>
+                    <div class="wrap-input100 validate-input m-b-23" data-validate="Email Username is required">
+                        <span class="label-input100">Email</span>
                         <asp:TextBox ID="TextBox1" runat="server" required="" class="input100" type="text" name="username" placeholder="Type your email"></asp:TextBox>
                         
                         <span class="focus-input100" data-symbol="&#xf206;"></span>
