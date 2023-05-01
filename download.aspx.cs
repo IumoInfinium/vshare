@@ -50,12 +50,12 @@ public partial class download : System.Web.UI.Page
                     Response.ContentType = "text/plain";
                     Response.Flush();
 
-                    Response.TransmitFile(file.FullName);
-                    Response.End();
-
                     string q = "update files set downloads = downloads+1 where id='" + ds.Tables[0].Rows[0][0].ToString() + "'";
                     cmd = new SqlCommand(q, conn);
                     cmd.ExecuteNonQuery();
+			
+                    Response.TransmitFile(file.FullName);
+                    Response.End();
 
                 }
                 else Response.Redirect("login.aspx");
